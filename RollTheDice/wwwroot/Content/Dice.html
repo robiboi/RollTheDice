@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.0/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.0/jquery-ui.min.js"></script>
+</head>
+<body>
+    <form>
+        <div>
+            <fieldset>
+                <legend>Dice 1</legend>
+                <label>Face Value: </label><input name="FaceValue1" type="number" max="6" min="1" maxlength="1" />
+                <label>Face Factor: </label><input name="FaceFactor1" type="number" max="5" min="1" maxlength="1" />
+            </fieldset>
+            <fieldset>
+                <legend>Dice 2</legend>
+                <label>Face Value: </label><input name="FaceValue2" type="number" max="6" min="1" maxlength="1" />
+                <label>Face Factor: </label><input name="FaceFactor2" type="number" max="5" min="1" maxlength="1" />
+            </fieldset>
+            <fieldset>
+                <legend>Number of Rolls</legend>
+                <input name="NumberOfRolls" type="number" />
+            </fieldset>
+            <button id="RollDice">Roll</button>
+            <div id="results">
+
+            </div>
+        </div>
+
+    </form>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#RollDice").click(function (e) {
+                e.preventDefault();
+                RollTheDice();
+            });
+        });
+
+        function RollTheDice() {
+            var formData = $("form").serializeArray();
+            var diceInput = JSON.stringify(getFormData(formData));
+
+            $.ajax({
+                type: "POST",
+                url: "Dice/RollDice",
+                data: diceInput,
+                contentType: "application/json;",
+                dataType: "json",
+                success: function (data) {
+                    var table = "<table>";
+                    var head = "<thead><tr><th>Dice 1</th><th>Dice 2</th><tr><thead>"
+                    var body = "<tbody>";
+                    for (var d in data) {
+                        body += "<tr><td>" + data[d]['faceValue1'] + "</td><td>" + data[d]['faceValue2'] + "</td></tr>";
+                    }
+                    body += "</tbody>";
+                    table += head + body + "</table>";
+                    $("#results").html(table);
+                }
+            });
+            return false;
+        }
+
+        function getFormData(formArray) {
+            var returnArray = {};
+            for (var i = 0; i < formArray.length; i++) {
+                returnArray[formArray[i]['name']] = formArray[i]['value'];
+            }
+            return returnArray;
+        }
+    </script>
+</body>
+</html>

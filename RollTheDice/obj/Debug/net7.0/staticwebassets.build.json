@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "EKLcpSICGAFn2UKvlFiznOwQynE1iYG/LDYf19vjUv0=",
+  "Source": "RollTheDice",
+  "BasePath": "_content/RollTheDice",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "RollTheDice\\wwwroot",
+      "Source": "RollTheDice",
+      "ContentRoot": "D:\\Projects - local\\RollTheDice\\wwwroot\\",
+      "BasePath": "_content/RollTheDice",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\Projects - local\\RollTheDice\\wwwroot\\Content\\Dice.html",
+      "SourceId": "RollTheDice",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects - local\\RollTheDice\\wwwroot\\",
+      "BasePath": "_content/RollTheDice",
+      "RelativePath": "Content/Dice.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Content\\Dice.html"
+    }
+  ]
+}
