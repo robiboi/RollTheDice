@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,13 +12,13 @@
         <div>
             <fieldset>
                 <legend>Dice 1</legend>
-                <label>Face Value: </label><input name="FaceValue1" type="number" max="6" min="1" maxlength="1" />
-                <label>Face Factor: </label><input name="FaceFactor1" type="number" max="5" min="1" maxlength="1" />
+                <label>Face Value (Max 6): </label><input name="FaceValue1" class="face_value" type="number" max="6" min="1" maxlength="1" />
+                <label>Face Factor (Max 5): </label><input name="FaceFactor1" class="face_factor" type="number" max="5" min="1" maxlength="1" />
             </fieldset>
             <fieldset>
                 <legend>Dice 2</legend>
-                <label>Face Value: </label><input name="FaceValue2" type="number" max="6" min="1" maxlength="1" />
-                <label>Face Factor: </label><input name="FaceFactor2" type="number" max="5" min="1" maxlength="1" />
+                <label>Face Value (Max 6): </label><input name="FaceValue2" class="face_value" type="number" max="6" min="1" maxlength="1" />
+                <label>Face Factor (Max 5): </label><input name="FaceFactor2" class="face_factor" type="number" max="5" min="1" maxlength="1" />
             </fieldset>
             <fieldset>
                 <legend>Number of Rolls</legend>
@@ -35,7 +35,12 @@
         $(document).ready(function () {
             $("#RollDice").click(function (e) {
                 e.preventDefault();
-                RollTheDice();
+                if (ValidateInput()) {
+                    RollTheDice();
+                } else {
+                    alert("Please check invalid input hightlighted in Red");
+                }
+                
             });
         });
 
@@ -62,6 +67,27 @@
                 }
             });
             return false;
+        }
+
+        function ValidateInput() {
+            var isValid = true;
+            $(".face_value").css("border-color", "inherit");
+            $(".face_factor").css("border-color", "inherit");
+
+            $(".face_value").each(function () {
+                if ($(this).val() > 6) {
+                    $(this).css("border-color", "red");
+                    isValid = false;
+                }
+            });
+            $(".face_factor").each(function () {
+                if ($(this).val() > 5) {
+                    $(this).css("border-color", "red");
+                    isValid = false;
+                }
+            });
+            
+            return isValid;
         }
 
         function getFormData(formArray) {
